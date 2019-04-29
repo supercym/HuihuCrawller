@@ -1,6 +1,6 @@
 package scheduler
 
-import "parallelCrawler/engine"
+import "huihuCrawler02/engine"
 
 type QueuedScheduler struct {
 	requestChan chan engine.Request
@@ -46,3 +46,5 @@ func (s *QueuedScheduler) Run() {
 		}
 	}()
 }
+
+

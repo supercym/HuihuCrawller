@@ -1,12 +1,12 @@
 package huihu
 
 import (
-	"huihuCrawler/engine"
+	"huihuCrawler02/engine"
 	"regexp"
 )
 
 const collegeListRe = `<a href="(/teacher/major.html[?]uid=[0-9a-z]+)">([^<]+)</a>`
-func ParseCollegeList(contents []byte) engine.ParseResult {
+func ParseCollegeList(contents []byte, url string) engine.ParseResult {
 	re := regexp.MustCompile(collegeListRe)
 	matches := re.FindAllSubmatch(contents, -1)
 

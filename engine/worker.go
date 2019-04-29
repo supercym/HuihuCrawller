@@ -1,8 +1,8 @@
 package engine
 
 import (
+	"huihuCrawler02/fetcher"
 	"log"
-	"parallelCrawler/fetcher"
 )
 
 func Worker(r Request) (ParseResult, error)  {
@@ -12,8 +12,5 @@ func Worker(r Request) (ParseResult, error)  {
 		log.Printf("Fetcher: error fetching url %s: %v", r.Url, err)
 		return ParseResult{}, err
 	}
-	return r.Parser.Parse(body, r.Url), nil
+	return r.ParserFunc(body, r.Url), nil
 }
-
-
-

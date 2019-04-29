@@ -7,11 +7,12 @@ import (
 type SimpleEngine struct {}
 
 func (e SimpleEngine) Run(seeds ...Request)  {
-	var requests []Request
-	for _, r := range seeds {
-		requests = append(requests, r)
+	requests := make([]Request, 0)
+	for _, req := range seeds {
+		requests = append(requests, req)
 	}
 
+	count := 0
 	for len(requests) > 0 {
 		r := requests[0]
 		requests = requests[1:]
@@ -20,14 +21,14 @@ func (e SimpleEngine) Run(seeds ...Request)  {
 		if err != nil {
 			continue
 		}
-
 		requests = append(requests, parseResult.Requests...)
-
 		for _, item := range parseResult.Items {
- 			log.Printf("Got item %v", item)
+				count++
+				log.Printf("Got item #%d: %+v", count, item)
 		}
-
 	}
 }
+
+
 
 

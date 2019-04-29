@@ -1,18 +1,16 @@
 package controller
 
 import (
-	"net/http"
-	"strings"
-
 	"context"
-	"reflect"
-	"strconv"
-
 	"gopkg.in/olivere/elastic.v5"
-	"parallelCrawler/engine"
-	"parallelCrawler/frontend/model"
-	"parallelCrawler/frontend/view"
+	"huihuCrawler02/engine"
+	"huihuCrawler02/frontend/model"
+	"huihuCrawler02/frontend/view"
+	"net/http"
+	"reflect"
 	"regexp"
+	"strconv"
+	"strings"
 )
 
 type SearchResultHandler struct {
@@ -60,7 +58,7 @@ func (h SearchResultHandler) getSearchResult(
 	q string, from int) (model.SearchResult, error) {
 	var result model.SearchResult
 	result.Query = q
-	resp, err := h.client.Search("dating_profile").
+	resp, err := h.client.Search("huihu").
 		Query(elastic.NewQueryStringQuery(rewriteQueryString(q))).
 		From(from).Do(context.Background())
 	if err != nil {

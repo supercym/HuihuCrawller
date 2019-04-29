@@ -1,13 +1,13 @@
 package huihu
 
 import (
-	"huihuCrawler/engine"
+	"huihuCrawler02/engine"
 	"regexp"
 )
 
 const collegeRe = `<a href="(/teacher/view.html[?]name=[^"]+)" target="_blank">([^&]+)&nbsp;</a>`
 
-func ParseCollege(contents []byte) engine.ParseResult {
+func ParseCollege(contents []byte, url string) engine.ParseResult {
 	//contents, err := ioutil.ReadFile("huihuCrawler/parser/huihu/college_test_data.html")
 	//if err != nil {
 	//	panic(err)

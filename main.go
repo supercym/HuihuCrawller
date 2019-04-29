@@ -1,33 +1,27 @@
 package main
 
 import (
-	"parallelCrawler/huihu/parser"
-	"parallelCrawler/engine"
-	"parallelCrawler/persist"
-	"parallelCrawler/scheduler"
+	"huihuCrawler02/engine"
+	"huihuCrawler02/parser/huihu"
+	"huihuCrawler02/persist"
+	"huihuCrawler02/scheduler"
 )
 
-
-
 func main() {
-	itemChan, err := persist.ItemSaver("college_profile")
+	itemChan, err := persist.ItemSaver("huihu")
 	if err != nil {
 		panic(err)
 	}
-
 	e := engine.ConcurrentEngine{
 		Scheduler:&scheduler.QueuedScheduler{},
-		WorkerCount:100,
+		//Scheduler:&scheduler.SimpleScheduler{},
+		WorkerCount:10,
 		ItemChan:itemChan,
-		RequestProcessor:engine.Worker,
 	}
+
 	e.Run(engine.Request{
-		Url:		"http://www.hhkaoyan.com/teacher/major.html",
-		Parser:engine.NewFuncParser(parser.ParseCollege, "parseCollege"),
+		Url:        "http://www.hhkaoyan.com/teacher/major.html",
+		ParserFunc: huihu.ParseCollegeList,
 	})
 
-	//e.Run(engine.Request{
-	//	Url:		"http://www.zhenai.com/zhenghun/shanghai",
-	//	ParserFunc:	parser.ParseCity,
-	//})
 }

@@ -1,26 +1,25 @@
 package main
 
 import (
+	"huihuCrawler02/frontend/controller"
 	"log"
 	"net/http"
-
 	"os"
-	"strings"
-
 	"path/filepath"
-
-	"parallelCrawler/frontend/controller"
+	"strings"
 )
 
 var (
 	templateFiles = []string{
-		"parallelCrawler/frontend/view/template.html",
+		"huihuCrawler02/frontend/view/template.html",
 		"view/template.html",
 	}
 )
 
 func main() {
-	pathPrefix := "parallelCrawler/front/view"
+	pathPrefix := "huihuCrawler02/frontend/view"
+	http.Handle("/", http.FileServer(http.Dir(pathPrefix)))
+
 	for _, filename := range templateFiles {
 		if PathExist(filename) {
 			pathPrefix = getPath(filename)
@@ -29,7 +28,7 @@ func main() {
 		}
 	}
 
-	http.Handle("/", http.FileServer(http.Dir(pathPrefix)))
+
 	err := http.ListenAndServe(":8088", nil)
 
 	if err != nil {

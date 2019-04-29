@@ -1,8 +1,8 @@
 package view
 
 import (
+	"huihuCrawler02/frontend/model"
 	"io"
-	"parallelCrawler/frontend/model"
 	"text/template"
 )
 
